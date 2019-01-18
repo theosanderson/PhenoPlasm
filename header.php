@@ -5,9 +5,9 @@
 $time_start = microtime(true); 
 include("db_details.php");
  $link = mysqli_connect($db_location,$db_user,$db_pass);
-$db_selected = mysqli_select_db('plasmogmdb', $link);
+$db_selected = mysqli_select_db( $link, 'plasmogmdb');
 if (!$db_selected) {
-    die ('Can\'t use foo : ' . mysqli_error());
+    die ('Can\'t use foo : ' . mysqli_error($link));
 }
 	function time_passed($timestamp)
 {
