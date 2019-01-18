@@ -149,8 +149,8 @@ z-index:2000;
 .corner-ribbon.orange{background: #e82;}
 .corner-ribbon.yellow{background: #ec0;}
 </style>
- <div class="corner-ribbon top-right sticky blue"><a href="http://michaeleisen.org/petition/" style="color:white">PhenoPlasm may be fragile, please report any bugs.</a></div>
-
+<!-- <div class="corner-ribbon top-right sticky blue"><a href="http://michaeleisen.org/petition/" style="color:white">PhenoPlasm may be fragile, please report any bugs.</a></div>
+-->
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
