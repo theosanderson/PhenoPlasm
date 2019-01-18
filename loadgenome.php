@@ -28,7 +28,7 @@ $line=mysqli_real_escape_string(rtrim($line));
 	
 	
 	echo($sql."<br>");
-	$result=mysqli_query($sql);
+	$result=mysqli_query($link, $sql);
 	if (!$result) {
     die('Invalid query: ' . mysqli_error());
 }
@@ -40,13 +40,13 @@ $previd=$geneid;
 }
 $aliases=explode(", ",$previd);
 	$sql="SELECT id FROM genes WHERE GeneID='$geneid'";
-	$result = mysqli_query($sql);
+	$result = mysqli_query($link, $sql);
 $value = mysqli_fetch_object($result);
 $lastid = $value->id;
 $sql="INSERT INTO `plasmogmdb`.`aliases` ( `geneid`,`alias`) VALUES ($lastid,'".implode("'),($lastid,'",$aliases)."') ON DUPLICATE KEY UPDATE alias=alias;";
 echo($sql."<br>");
 	
-	$result=mysqli_query($sql);
+	$result=mysqli_query($link, $sql);
 	if (!$result) {
     echo('<br><strong>Invalid query: ' . mysqli_error()."</strong><br>");
 

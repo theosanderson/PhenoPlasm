@@ -31,17 +31,17 @@ $line=mysqli_real_escape_string(rtrim($line));
 	
 	
 	$sql="SELECT id AS geneID, LastChecked FROM `plasmogmdb`.`genes` WHERE `GeneID`='$geneid'";
-	$result=mysqli_query($sql);
+	$result=mysqli_query($link, $sql);
 	if(!(mysqli_num_rows($result))){
 		//echo("A");
 	$sql="SELECT id AS geneID,LastChecked FROM  `plasmogmdb`.`genes` WHERE `GeneID`='$geneid.1'";
-	$result=mysqli_query($sql);
+	$result=mysqli_query($link, $sql);
 	if(!(mysqli_num_rows($result))){
 		//echo("B");
 	$sql="SELECT id AS geneID,LastChecked FROM  `plasmogmdb`.`genes` WHERE '$previd' LIKE 
   CONCAT('%', `GeneID`, '%')";
 
-	$result=mysqli_query($sql);
+	$result=mysqli_query($link, $sql);
 	
 	if(mysqli_num_rows($result))
 	{
@@ -49,7 +49,7 @@ $line=mysqli_real_escape_string(rtrim($line));
 $row=mysqli_fetch_assoc($result);
 		$id=$row['geneID'];
 		$sql="SELECT id AS geneID,LastChecked FROM  `plasmogmdb`.`genes` WHERE `id`=$id";
-		$result=mysqli_query($sql);
+		$result=mysqli_query($link, $sql);
 	}
 	
 	}
@@ -62,7 +62,7 @@ $row=mysqli_fetch_assoc($result);
 		$id=$row['geneID'];
 		$lastchecked=$row['LastChecked'];
 			$sql2="SELECT id FROM `plasmogmdb`.genesnew WHERE `id`=$id";
-			$result2=mysqli_query($sql2);
+			$result2=mysqli_query($link, $sql2);
 			if(mysqli_num_rows($result2)==0){
 				$allok=true;
 			}
@@ -79,7 +79,7 @@ $row=mysqli_fetch_assoc($result);
 		
 		//echo "<br>";
 		$sql="INSERT INTO `plasmogmdb`.`genesnew` ( `id`,`GeneID`, `Organism`, `Symbol`, `PrevIDs`, `ProdDesc`, `ortholog`,`LastChecked`) VALUES ($id, '$geneid', '$org', '$symbol', '$previd', '$product',  '$ortholog',$lastchecked)";
-		mysqli_query($sql);
+		mysqli_query($link, $sql);
 		
 	
 	
@@ -87,7 +87,7 @@ $row=mysqli_fetch_assoc($result);
 	else{
 	//	echo"<br>PROBLEM2<br>";
 		$sql="INSERT INTO `plasmogmdb`.`genesnew` ( `GeneID`, `Organism`, `Symbol`, `PrevIDs`, `ProdDesc`, `ortholog`) VALUES ( '$geneid', '$org', '$symbol', '$previd', '$product',  '$ortholog') ";
-		mysqli_query($sql);
+		mysqli_query($link, $sql);
 		
 	}
 	echo("<br>".$sql."<br>");
@@ -102,12 +102,12 @@ $previd=str_replace("Previous IDs: ","",$previd);
 $aliases=explode(", ",$previd);
 	$sql="SELECT id FROM genesnew WHERE GeneID='$geneid'";
 echo $sql;
-	$result = mysqli_query($sql);
+	$result = mysqli_query($link, $sql);
 $value = mysqli_fetch_object($result);
 $lastid = $value->id;
 $sql="INSERT INTO `plasmogmdb`.`aliasesnew` ( `geneid`,`alias`) VALUES ($lastid,'".implode("'),($lastid,'",$aliases)."') ON DUPLICATE KEY UPDATE alias=alias;";
 echo $sql;
-mysqli_query($sql);
+mysqli_query($link, $sql);
 }
 }
  include("footer.php") ?>

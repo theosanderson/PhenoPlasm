@@ -44,7 +44,7 @@ $query.="
 //print $query;
 //$query=$query="SELECT * FROM genes LEFT JOIN (SELECT COUNT(time) AS loccount, gene_id AS locgid FROM localisation GROUP BY gene_id) bla ON genes.id=bla.locgid LEFT JOIN (SELECT COUNT(time) AS phecount, gene_id AS phegid FROM phenotypes GROUP BY gene_id) bla2 ON genes.id=bla2.phegid";
 include("establishlocalisations.php");
-$result = mysqli_query($query);
+$result = mysqli_query($link, $query);
 $numrows=mysqli_num_rows($result);
 if (!$result) {
     die('Invalid query: ' . mysqli_error());

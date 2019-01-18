@@ -18,7 +18,7 @@
 						function trysql($n)
 {
 echo($n."<br>");
-	$result=mysqli_query($n);
+	$result=mysqli_query($link, $n);
 	if (!$result) {
     die('Invalid query: ' . mysqli_error());
 }
@@ -42,7 +42,7 @@ trysql("INSERT INTO phenotypes (gene_id,typeofsupport,supportid,stage,phenotype)
 
 
 }
-					$result = mysqli_query('SELECT * FROM genes');
+					$result = mysqli_query($link, 'SELECT * FROM genes');
 $genes = array();
 while($row=mysqli_fetch_assoc($result)){
 $genes[$row['GeneID']]=$row['id'];

@@ -18,7 +18,7 @@ include("establishlocalisations.php");
 				                <div class="row">
                     <div class="col-lg-12">
                         <h4><i class="fa fa-flask fa-fw"></i> Mutant phenotypes <small>[<a href="update.php?gene=<?= $gene['GeneID']?>">+</a>]</h4>
-						<? 			$result = mysqli_query('SELECT * FROM phenotypes INNER JOIN genes ON phenotypes.gene_id=genes.id ORDER BY Organism,GeneID');
+						<? 			$result = mysqli_query($link, 'SELECT * FROM phenotypes INNER JOIN genes ON phenotypes.gene_id=genes.id ORDER BY Organism,GeneID');
 						?>
 						<?
 						$tablestarted=0;

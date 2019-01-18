@@ -16,10 +16,10 @@
                         
 						<?
 						
-						mysqli_query("DROP TABLE orthologlookup");
+						mysqli_query($link, "DROP TABLE orthologlookup");
 	$sql="CREATE TABLE orthologlookup SELECT Organism, ortholog, COUNT(DISTINCT GeneID) AS catcount, GROUP_CONCAT(GeneID) AS catid FROM genes  GROUP BY Organism, ortholog ORDER BY `genes`.`ortholog` ASC";
 echo($sql."<br>");
-	$result=mysqli_query($sql);
+	$result=mysqli_query($link, $sql);
 	if (!$result) {
     die('Invalid query: ' . mysqli_error());
 }

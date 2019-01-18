@@ -15,7 +15,7 @@ setcookie(
 <? include("header.php")
 ?>
 <?
-$result = mysqli_query('SELECT * FROM genes WHERE GeneID="'.$_GET['gene'].'"');
+$result = mysqli_query($link, 'SELECT * FROM genes WHERE GeneID="'.$_GET['gene'].'"');
 if (!$result) {
     die('Invalid query: ' . mysqli_error());
 }
@@ -45,14 +45,14 @@ for( $i=0; $i<100; $i++ )
     if(isset($_POST['stage'.$i])&&$_POST['stage'.$i]!=0){
 	if($_POST['type']==1||$i>0){
 	$sql="INSERT INTO phenotypes (stage,gene_id,phenotype,supportid,ip,time,notes,credit,inst,type) VALUES ('".$i."',".$_POST['geneid'].",'".$_POST['stage'.$i]."','".$_POST['pubmed']."','".$_SERVER['REMOTE_ADDR']."',".time().",'".mysqli_real_escape_string($_POST['notes'])."','".mysqli_real_escape_string($_POST['namer'])."','".mysqli_real_escape_string($_POST['institution'])."','".mysqli_real_escape_string($_POST['type'])."')";
-mysqli_query( $sql); 
+mysqli_query($link,  $sql); 
 }
 	}
 }
 					
 				}
 					
-					mysqli_query("UPDATE genes SET LastChecked=".time()." WHERE id=".$_POST['geneid'])?>
+					mysqli_query($link, "UPDATE genes SET LastChecked=".time()." WHERE id=".$_POST['geneid'])?>
 					<script>
 
     window.location.assign("/singlegene.php?gene=<?= $gene['GeneID'] ?>")
@@ -134,7 +134,7 @@ function handleChange(bla) {
                            
                         
 <?
-											$result = mysqli_query('SELECT * FROM phenotypestages WHERE id>0'); 
+											$result = mysqli_query($link, 'SELECT * FROM phenotypestages WHERE id>0'); 
 											while($row=mysqli_fetch_assoc($result)){
 											
 											?>
@@ -143,7 +143,7 @@ function handleChange(bla) {
                                             <label><?= $row['name'] ?></label>
                                             <select class="form-control stagebox" name="stage<?= $row['id'] ?>">
 											<option value="0" selected>Not tested/reported</option>
-											<?$result2 = mysqli_query('SELECT * FROM phenotyperefs'); 
+											<?$result2 = mysqli_query($link, 'SELECT * FROM phenotyperefs'); 
 											while($row2=mysqli_fetch_assoc($result2)){
 											
 											?>

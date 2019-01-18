@@ -18,7 +18,7 @@
 						function trysql($n)
 {
 echo($n."<br>");
-	$result=mysqli_query($n);
+	$result=mysqli_query($link, $n);
 	if (!$result) {
     die('Invalid query: ' . mysqli_error());
 }
@@ -27,7 +27,7 @@ echo($n."<br>");
 	
 
 
-$result = mysqli_query('SELECT * FROM genes');
+$result = mysqli_query($link, 'SELECT * FROM genes');
 $genes = array();
 while($row=mysqli_fetch_assoc($result)){
 $genes[$row['GeneID']]=$row['id'];
@@ -65,7 +65,7 @@ else{
 	
 }}
 $sql.="(0,0)";
-	mysqli_query("INSERT INTO orthlinks (source, dest) VALUES ".$sql);
+	mysqli_query($link, "INSERT INTO orthlinks (source, dest) VALUES ".$sql);
 						?>
                     <!-- /.col-lg-12 -->
                 </div>

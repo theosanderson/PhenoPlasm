@@ -2,7 +2,7 @@
 include("establishlocalisations.php");
 ?>
 <?
-$result = mysqli_query('SELECT * FROM genes WHERE GeneID="'.$_GET['gene'].'"');
+$result = mysqli_query($link, 'SELECT * FROM genes WHERE GeneID="'.$_GET['gene'].'"');
 if (!$result) {
     die('Invalid query: ' . mysqli_error());
 }
@@ -34,7 +34,7 @@ if($gene=mysqli_fetch_assoc($result)){
                     <div class="col-lg-12">
 					
 					<h4><i class="fa fa-bullseye fa-fw"></i> Disruptability <small>[<a href="update.php?gene=<?= $gene['GeneID']?>">+</a>]</small></h4>
-						<? 			$result = mysqli_query('SELECT * FROM phenotypes INNER JOIN genes ON phenotypes.gene_id=genes.id WHERE gene_id="'.$gene['id'].'" AND stage=0 ORDER BY stage');
+						<? 			$result = mysqli_query($link, 'SELECT * FROM phenotypes INNER JOIN genes ON phenotypes.gene_id=genes.id WHERE gene_id="'.$gene['id'].'" AND stage=0 ORDER BY stage');
 						?>
 						<?
 						$tablestarted=0;
@@ -69,7 +69,7 @@ if($gene=mysqli_fetch_assoc($result)){
 						include("phenotypetable.php");
 						}
 						
-						$result=mysqli_query("SELECT DISTINCT g2.*,phenotypes.* FROM (phenotypes INNER JOIN ((genes as g1 INNER JOIN orthlinks ON g1.id = orthlinks.source) INNER JOIN genes AS g2 ON orthlinks.dest = g2.id) ON g2.id=phenotypes.gene_id )INNER JOIN orthcounts ON g1.id=orthcounts.source AND g2.Organism=orthcounts.Organism  WHERE  count=1 AND  g1.id=".$gene['id']." AND stage=0  ORDER BY stage");
+						$result=mysqli_query($link, "SELECT DISTINCT g2.*,phenotypes.* FROM (phenotypes INNER JOIN ((genes as g1 INNER JOIN orthlinks ON g1.id = orthlinks.source) INNER JOIN genes AS g2 ON orthlinks.dest = g2.id) ON g2.id=phenotypes.gene_id )INNER JOIN orthcounts ON g1.id=orthcounts.source AND g2.Organism=orthcounts.Organism  WHERE  count=1 AND  g1.id=".$gene['id']." AND stage=0  ORDER BY stage");
 		
 		if(mysqli_num_rows($result)>0){
 		if($tablestarted==0){tablestart(false);}
@@ -92,7 +92,7 @@ if($gene=mysqli_fetch_assoc($result)){
 							</div>
 					
                         <h4 style="margin-top:20px;"><i class="fa fa-gear fa-fw"></i> Mutant phenotypes <small>[<a href="update.php?gene=<?= $gene['GeneID']?>">+</a>]</small></h4>
-						<? 			$result = mysqli_query('SELECT * FROM phenotypes INNER JOIN genes ON phenotypes.gene_id=genes.id WHERE gene_id="'.$gene['id'].'" AND stage!=0  ORDER BY stage');
+						<? 			$result = mysqli_query($link, 'SELECT * FROM phenotypes INNER JOIN genes ON phenotypes.gene_id=genes.id WHERE gene_id="'.$gene['id'].'" AND stage!=0  ORDER BY stage');
 						?>
 						<?
 						$tablestarted=0;
@@ -107,7 +107,7 @@ if($gene=mysqli_fetch_assoc($result)){
 						include("phenotypetable.php");
 						}
 						
-						$result=mysqli_query("SELECT DISTINCT g2.*,phenotypes.* FROM (phenotypes INNER JOIN ((genes as g1 INNER JOIN orthlinks ON g1.id = orthlinks.source) INNER JOIN genes AS g2 ON orthlinks.dest = g2.id) ON g2.id=phenotypes.gene_id) INNER JOIN orthcounts ON g1.id=orthcounts.source AND g2.Organism=orthcounts.Organism  WHERE  count=1 AND g1.id=".$gene['id']." AND stage!=0  ORDER BY stage");
+						$result=mysqli_query($link, "SELECT DISTINCT g2.*,phenotypes.* FROM (phenotypes INNER JOIN ((genes as g1 INNER JOIN orthlinks ON g1.id = orthlinks.source) INNER JOIN genes AS g2 ON orthlinks.dest = g2.id) ON g2.id=phenotypes.gene_id) INNER JOIN orthcounts ON g1.id=orthcounts.source AND g2.Organism=orthcounts.Organism  WHERE  count=1 AND g1.id=".$gene['id']." AND stage!=0  ORDER BY stage");
 		
 		if(mysqli_num_rows($result)>0){
 		if($tablestarted==0){tablestart(true);}
@@ -131,7 +131,7 @@ if($gene=mysqli_fetch_assoc($result)){
 					<? if(!isset($_COOKIE['loc'])){ ?> <!-- <? } ?>
 					<div class="col-lg-12">
                         <h4  style="margin-top:20px"><i class="fa fa-crosshairs fa-fw"></i> Localisation <small>[<a href="updateloc.php?gene=<?= $gene['GeneID']?>">+</a>]</small></h4>
-						<? 			$result = mysqli_query('SELECT * FROM localisation  INNER JOIN localisations ON localisations.id=localisation.localisation WHERE gene_id="'.$gene['id'].'"');
+						<? 			$result = mysqli_query($link, 'SELECT * FROM localisation  INNER JOIN localisations ON localisations.id=localisation.localisation WHERE gene_id="'.$gene['id'].'"');
 						
 						if(mysqli_num_rows($result)>0){?>
 						
@@ -199,9 +199,9 @@ if($gene=mysqli_fetch_assoc($result)){
 						</div>
 						<?
 					}
-					$result=mysqli_query("SELECT DISTINCT g2.*,mmp.* FROM (mmp INNER JOIN ((genes as g1 INNER JOIN orthlinks ON g1.id = orthlinks.source) INNER JOIN genes AS g2 ON orthlinks.dest = g2.id) ON g2.id=mmp.gene )INNER JOIN orthcounts ON g1.id=orthcounts.source AND g2.Organism=orthcounts.Organism  WHERE  count=1 AND  g1.id=".$gene['id']);
+					$result=mysqli_query($link, "SELECT DISTINCT g2.*,mmp.* FROM (mmp INNER JOIN ((genes as g1 INNER JOIN orthlinks ON g1.id = orthlinks.source) INNER JOIN genes AS g2 ON orthlinks.dest = g2.id) ON g2.id=mmp.gene )INNER JOIN orthcounts ON g1.id=orthcounts.source AND g2.Organism=orthcounts.Organism  WHERE  count=1 AND  g1.id=".$gene['id']);
 					
-					$result2=mysqli_query("SELECT * FROM mmp WHERE gene=".$gene['id']);
+					$result2=mysqli_query($link, "SELECT * FROM mmp WHERE gene=".$gene['id']);
 					if(mysqli_num_rows($result)+mysqli_num_rows($result2)>0){
 						?>
 						<div class="row">
@@ -256,7 +256,7 @@ if($gene=mysqli_fetch_assoc($result)){
 										<tr>
                                             <td>Orthologs</td>
                                             <td><?
-										$result = mysqli_query('SELECT  g2.GeneID AS orthgene FROM ((genes as g1 INNER JOIN orthlinks ON g1.id = orthlinks.source) INNER JOIN genes AS g2 ON orthlinks.dest = g2.id) INNER JOIN orthcounts ON g1.id=orthcounts.source AND g2.Organism=orthcounts.Organism WHERE count>0 AND g1.id ='.$gene['id']);
+										$result = mysqli_query($link, 'SELECT  g2.GeneID AS orthgene FROM ((genes as g1 INNER JOIN orthlinks ON g1.id = orthlinks.source) INNER JOIN genes AS g2 ON orthlinks.dest = g2.id) INNER JOIN orthcounts ON g1.id=orthcounts.source AND g2.Organism=orthcounts.Organism WHERE count>0 AND g1.id ='.$gene['id']);
 										while($row=mysqli_fetch_assoc($result)){
 										if($comma){
 										?>, <?

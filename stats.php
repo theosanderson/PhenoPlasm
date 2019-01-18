@@ -10,7 +10,7 @@
                                         <tr>
                                             <th class="tallhead">Organism</th> <th class="tallhead">Number of genes</th></tr></thead>
 <?
-$result=mysqli_query("Select genes.Organism AS Organism, Count(Distinct gene_id) As numgenes FROM phenotypes INNER JOIN genes on phenotypes.gene_id = genes.id GROUP BY genes.Organism");
+$result=mysqli_query($link, "Select genes.Organism AS Organism, Count(Distinct gene_id) As numgenes FROM phenotypes INNER JOIN genes on phenotypes.gene_id = genes.id GROUP BY genes.Organism");
 $jsarray=array();
 while($row=mysqli_fetch_assoc($result)){
 	$jsarray[]="['".$row['Organism']."',".$row['numgenes']."]";
@@ -57,7 +57,7 @@ function drawBasic() {
 	  </script>
 	  
 	  <?
-	  $result=mysqli_query("Select phenotypeapproaches.longdesc AS Organism, Count(Distinct gene_id) As numgenes FROM phenotypes INNER JOIN genes on phenotypes.gene_id = genes.id INNER JOIN phenotypeapproaches ON phenotypeapproaches.id = phenotypes.type OR (phenotypeapproaches.id=1 AND phenotypes.type=0) GROUP BY phenotypeapproaches.longdesc");
+	  $result=mysqli_query($link, "Select phenotypeapproaches.longdesc AS Organism, Count(Distinct gene_id) As numgenes FROM phenotypes INNER JOIN genes on phenotypes.gene_id = genes.id INNER JOIN phenotypeapproaches ON phenotypeapproaches.id = phenotypes.type OR (phenotypeapproaches.id=1 AND phenotypes.type=0) GROUP BY phenotypeapproaches.longdesc");
 	  $jsarray=array();
 	  while($row=mysqli_fetch_assoc($result)){
 	$jsarray[]="['".$row['Organism']."',".$row['numgenes']."]";

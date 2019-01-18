@@ -139,7 +139,7 @@ else{
 											<div class="form-group">
 					<label>Primary species</label>
 				<? 	$sql="SELECT Organism FROM genes GROUP BY Organism";
-										$result=mysqli_query($sql); ?>
+										$result=mysqli_query($link, $sql); ?>
 										<select name="primespecies">
 									<?	  while ($row=mysqli_fetch_assoc($result)){?>
 									<option 
@@ -156,7 +156,7 @@ else{
 					<label>Approaches to include:</label><br />
                                             <?
 											$sql="SELECT phenotypeapproaches.id AS id, phenotypeapproaches.longdesc,phenotypeapproaches.short, COUNT(phenotypes.id) AS count FROM phenotypes RIGHT JOIN phenotypeapproaches ON phenotypes.type  = phenotypeapproaches.id GROUP BY phenotypeapproaches.longdesc";
-											$result=mysqli_query($sql);
+											$result=mysqli_query($link, $sql);
 											$i=1;
 											while ($row=mysqli_fetch_assoc($result)){
 											?>
@@ -170,7 +170,7 @@ $i++;} ?>
 											<!--<div class="form-group">
 										<?
 										$sql="SELECT Organism FROM genes GROUP BY Organism";
-										$result=mysqli_query($sql);
+										$result=mysqli_query($link, $sql);
 										?>
 				<label>Organisms to include:</label><br />
                                            

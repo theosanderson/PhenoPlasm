@@ -4,7 +4,7 @@ $csv=true;
 include("header.php");
 include("establishlocalisations.php");
 
-?><? 			$result = mysqli_query('SELECT * FROM phenotypes INNER JOIN genes ON phenotypes.gene_id=genes.id ORDER BY Organism,GeneID');
+?><? 			$result = mysqli_query($link, 'SELECT * FROM phenotypes INNER JOIN genes ON phenotypes.gene_id=genes.id ORDER BY Organism,GeneID');
 						?><?
 						$tablestarted=0;
 						function tablestart(){

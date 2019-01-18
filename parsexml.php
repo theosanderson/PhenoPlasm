@@ -3,18 +3,18 @@
 file_put_contents("xml/dump.xml",file_get_contents("http://www.pberghei.eu/csv/rmgm_phenotype_list.php"));
 include("header.php");
 
-$result=mysqli_query("SELECT CONVERT(MID(supportid,6,20), UNSIGNED INTEGER) AS rmid FROM `phenotypes` WHERE typeofsupport=1 ORDER BY rmid DESC LIMIT 1");
+$result=mysqli_query($link, "SELECT CONVERT(MID(supportid,6,20), UNSIGNED INTEGER) AS rmid FROM `phenotypes` WHERE typeofsupport=1 ORDER BY rmid DESC LIMIT 1");
 $num=mysqli_result ($result,0);
 
 function trysql($n){
 echo($n."<br>");
 echo $sql;
-	$result=mysqli_query($n);
+	$result=mysqli_query($link, $n);
 	if (!$result) {
     die('Invalid query: ' . mysqli_error());
 }
 }
-$result = mysqli_query('SELECT * FROM genes');
+$result = mysqli_query($link, 'SELECT * FROM genes');
 $genes = array();
 while($row=mysqli_fetch_assoc($result)){
 $genes[$row['GeneID']]=$row['id'];

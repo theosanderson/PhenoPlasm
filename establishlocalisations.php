@@ -1,6 +1,6 @@
 <?
 
-$result = mysqli_query('SELECT * FROM localisations');
+$result = mysqli_query($link, 'SELECT * FROM localisations');
 $locs = array();
 while($row=mysqli_fetch_assoc($result)){
 $locs[$row['id']]=$row['name'];
@@ -15,7 +15,7 @@ global $locs;
 
 //////////////////
 
-$result = mysqli_query('SELECT * FROM phenotyperefs');
+$result = mysqli_query($link, 'SELECT * FROM phenotyperefs');
 $pherefs = array();
 $pherefs2 = array();
 $pherefs3 = array();
@@ -44,7 +44,7 @@ global $pherefs3;
 } 
 
 ///////////
-$result = mysqli_query('SELECT * FROM phenotypestages');
+$result = mysqli_query($link, 'SELECT * FROM phenotypestages');
 $stages = array();
 while($row=mysqli_fetch_assoc($result)){
 $stages[$row['id']]=$row['name'];

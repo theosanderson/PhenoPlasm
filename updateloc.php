@@ -15,7 +15,7 @@ setcookie(
 <? include("header.php")
 ?>
 <?
-$result = mysqli_query('SELECT * FROM genes WHERE GeneID="'.$_GET['gene'].'"');
+$result = mysqli_query($link, 'SELECT * FROM genes WHERE GeneID="'.$_GET['gene'].'"');
 if (!$result) {
     die('Invalid query: ' . mysqli_error());
 }
@@ -40,9 +40,9 @@ if($gene=mysqli_fetch_assoc($result)){
 				{
 					$sql="INSERT INTO localisation (stage,gene_id,localisation,supportid,ip,time,notes,credit,inst,type) VALUES ('".$_POST['stage']."',".$_POST['geneid'].",'".$_POST['localisation']."','".$_POST['pubmed']."','".$_SERVER['REMOTE_ADDR']."',".time().",'".mysqli_real_escape_string($_POST['notes'])."','".mysqli_real_escape_string($_POST['namer'])."','".mysqli_real_escape_string($_POST['institution'])."','".mysqli_real_escape_string($_POST['type'])."')";
 					echo $sql;
-				mysqli_query( $sql); }
+				mysqli_query($link,  $sql); }
 					
-					mysqli_query("UPDATE genes SET LastChecked=".time()." WHERE id=".$_POST['geneid'])?>
+					mysqli_query($link, "UPDATE genes SET LastChecked=".time()." WHERE id=".$_POST['geneid'])?>
 					<script>
 
     window.location.assign("/singlegene.php?gene=<?= $gene['GeneID'] ?>")
@@ -60,7 +60,7 @@ if($gene=mysqli_fetch_assoc($result)){
                                             <label>What stage is the localisation described in?</label>
                                             <select class="form-control" name="stage">
 											<?
-											$result = mysqli_query('SELECT * FROM phenotypestages'); 
+											$result = mysqli_query($link, 'SELECT * FROM phenotypestages'); 
 											while($row=mysqli_fetch_assoc($result)){
 											
 											?>
@@ -71,7 +71,7 @@ if($gene=mysqli_fetch_assoc($result)){
 										<div class="form-group">
                                             <label>Where is the protein localised?</label>
 											<?
-											$result = mysqli_query('SELECT * FROM localisations'); 
+											$result = mysqli_query($link, 'SELECT * FROM localisations'); 
 											while($row=mysqli_fetch_assoc($result)){
 											
 											?>
