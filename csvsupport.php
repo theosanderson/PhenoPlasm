@@ -13,9 +13,9 @@
                                         <tr>
                                            <th width=20 class="tallhead">CSV symbol</th> <th class="tallhead" width=20>Symbol</th> <th class="tallhead">Description</th></tr></thead>
 <?
-$result=mysql_query("SELECT * FROM phenotyperefs WHERE ordering >= 0 ORDER BY ORDERING");
+$result=mysqli_query("SELECT * FROM phenotyperefs WHERE ordering >= 0 ORDER BY ORDERING");
 $jsarray=array();
-while($row=mysql_fetch_assoc($result)){
+while($row=mysqli_fetch_assoc($result)){
 	if($row['name']=="Possible"){
 		$row['name']="Disruption possible (viable mutant)";
 	}

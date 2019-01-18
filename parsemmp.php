@@ -7,14 +7,14 @@ include("header.php");
 function trysql($n){
 echo($n."<br>");
 echo $sql;
-	$result=mysql_query($n);
+	$result=mysqli_query($n);
 	if (!$result) {
-    die('Invalid query: ' . mysql_error());
+    die('Invalid query: ' . mysqli_error());
 }
 }
-$result = mysql_query('SELECT * FROM genes');
+$result = mysqli_query('SELECT * FROM genes');
 $genes = array();
-while($row=mysql_fetch_assoc($result)){
+while($row=mysqli_fetch_assoc($result)){
 $genes[$row['GeneID']]=$row['id'];
 }
 	
@@ -28,7 +28,7 @@ foreach($lines as $line){
 	//echo $c."<br>";
 	$b=trim(substr(str_replace('"', "", $b),4,100000));
 	$b=str_replace("\n","<br>",$b);
-	$b=mysql_escape_string($b);
+	$b=mysqli_escape_string($b);
 	$c=trim($c);
 	if($id != ""){
 	$sql="INSERT INTO mmp (gene, url,caption,image) VALUES ($id,'$a','$b','$c')";

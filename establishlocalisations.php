@@ -1,8 +1,8 @@
 <?
 
-$result = mysql_query('SELECT * FROM localisations');
+$result = mysqli_query('SELECT * FROM localisations');
 $locs = array();
-while($row=mysql_fetch_assoc($result)){
+while($row=mysqli_fetch_assoc($result)){
 $locs[$row['id']]=$row['name'];
 
 }
@@ -15,11 +15,11 @@ global $locs;
 
 //////////////////
 
-$result = mysql_query('SELECT * FROM phenotyperefs');
+$result = mysqli_query('SELECT * FROM phenotyperefs');
 $pherefs = array();
 $pherefs2 = array();
 $pherefs3 = array();
-while($row=mysql_fetch_assoc($result)){
+while($row=mysqli_fetch_assoc($result)){
 $pherefs[$row['id']]=$row['name'];
 $pherefs2[$row['id']]=$row['short'];
 $pherefs3[$row['id']]=$row['shorttext'];
@@ -44,9 +44,9 @@ global $pherefs3;
 } 
 
 ///////////
-$result = mysql_query('SELECT * FROM phenotypestages');
+$result = mysqli_query('SELECT * FROM phenotypestages');
 $stages = array();
-while($row=mysql_fetch_assoc($result)){
+while($row=mysqli_fetch_assoc($result)){
 $stages[$row['id']]=$row['name'];
 
 }

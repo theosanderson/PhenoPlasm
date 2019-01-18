@@ -139,9 +139,9 @@ else{
 											<div class="form-group">
 					<label>Primary species</label>
 				<? 	$sql="SELECT Organism FROM genes GROUP BY Organism";
-										$result=mysql_query($sql); ?>
+										$result=mysqli_query($sql); ?>
 										<select name="primespecies">
-									<?	  while ($row=mysql_fetch_assoc($result)){?>
+									<?	  while ($row=mysqli_fetch_assoc($result)){?>
 									<option 
 									
 									<? if($row['Organism']=="P. falciparum 3D7" ) {?> selected <? } ?>
@@ -156,9 +156,9 @@ else{
 					<label>Approaches to include:</label><br />
                                             <?
 											$sql="SELECT phenotypeapproaches.id AS id, phenotypeapproaches.longdesc,phenotypeapproaches.short, COUNT(phenotypes.id) AS count FROM phenotypes RIGHT JOIN phenotypeapproaches ON phenotypes.type  = phenotypeapproaches.id GROUP BY phenotypeapproaches.longdesc";
-											$result=mysql_query($sql);
+											$result=mysqli_query($sql);
 											$i=1;
-											while ($row=mysql_fetch_assoc($result)){
+											while ($row=mysqli_fetch_assoc($result)){
 											?>
 											 <input  name="approach<?= $i ?>" type="hidden" value="<?= $row['id'] ?>">
                                             <input checked name="includeapproach<?= $i ?>" type="checkbox"<?
@@ -170,13 +170,13 @@ $i++;} ?>
 											<!--<div class="form-group">
 										<?
 										$sql="SELECT Organism FROM genes GROUP BY Organism";
-										$result=mysql_query($sql);
+										$result=mysqli_query($sql);
 										?>
 				<label>Organisms to include:</label><br />
                                            
                                            <?
 										    $i=1;
-										   while ($row=mysql_fetch_assoc($result)){
+										   while ($row=mysqli_fetch_assoc($result)){
 											?>
                                             <input name="species<?= $i ?>" type="hidden" value="<?= $row['Organism'] ?>"> <input name="includespecies<?= $i ?>"  type="checkbox" checked><?= $row['Organism'] ?></input><br />
 <? 

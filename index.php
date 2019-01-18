@@ -31,8 +31,8 @@
                                 <div class="col-xs-9 text-right">
                                     <div class="huge"><?
 									 $sql="Select Count(Distinct gene_id) As numgenes FROM phenotypes INNER JOIN genes on phenotypes.gene_id = genes.id";
-									 $result=mysql_query($sql);
-									 $res=mysql_fetch_assoc($result);
+									 $result=mysqli_query($sql);
+									 $res=mysqli_fetch_assoc($result);
 									 echo $res['numgenes'];
 									?></div>
                                     <div>phenotyped genes</div>
@@ -59,8 +59,8 @@
                                 <div class="col-xs-9 text-right">
                                     <div class="huge"><?
 									 $sql="Select Count(Distinct gene_id) As numgenes FROM localisation  INNER JOIN genes on localisation.gene_id = genes.id";
-									 $result=mysql_query($sql);
-									 $res=mysql_fetch_assoc($result);
+									 $result=mysqli_query($sql);
+									 $res=mysqli_fetch_assoc($result);
 									 echo $res['numgenes'];
 									?></div>
                                     <div>proteins localised.</div> 
@@ -86,8 +86,8 @@
                                 <div class="col-xs-9 text-right">
                                     <div class="huge"><?
 									 $sql="Select Count(Distinct orthid) As numgenes FROM phenotypes INNER JOIN genes on phenotypes.gene_id = genes.id";
-									 $result=mysql_query($sql);
-									 $res=mysql_fetch_assoc($result);
+									 $result=mysqli_query($sql);
+									 $res=mysqli_fetch_assoc($result);
 									 echo $res['numgenes'];
 									?></div>
                                     <div>ortholog groups.</div> 
@@ -172,8 +172,8 @@
                                 <?
 							
 								$sql="(SELECT gene_id,GeneID,ProdDesc,time,'localisation' AS type FROM localisation INNER JOIN genes ON genes.id=localisation.gene_id) UNION (SELECT gene_id,GeneID,ProdDesc,time,'phenotype' AS type FROM phenotypes INNER JOIN genes ON genes.id=phenotypes.gene_id) ORDER BY time DESC LIMIT 10";
-								$result=mysql_query($sql);
-								while($row=mysql_fetch_assoc($result)){
+								$result=mysqli_query($sql);
+								while($row=mysqli_fetch_assoc($result)){
 								?>
 								<a href="/singlegene.php?gene=<?=$row['GeneID']?>" class="list-group-item">
                                     <i class="fa <? if($row['type']=="phenotype"){?>fa-gear<?}else{?>fa-crosshairs<?}?> fa-fw"></i> New <?= $row['type'] ?> for <?= $row['ProdDesc'] ?>

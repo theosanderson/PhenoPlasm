@@ -15,12 +15,12 @@ setcookie(
 <? include("header.php")
 ?>
 <?
-$result = mysql_query('SELECT * FROM genes WHERE GeneID="'.$_GET['gene'].'"');
+$result = mysqli_query('SELECT * FROM genes WHERE GeneID="'.$_GET['gene'].'"');
 if (!$result) {
-    die('Invalid query: ' . mysql_error());
+    die('Invalid query: ' . mysqli_error());
 }
 
-if($gene=mysql_fetch_assoc($result)){
+if($gene=mysqli_fetch_assoc($result)){
 ?>
 <div id="page-wrapper">
             <div class="container-fluid">
@@ -38,11 +38,11 @@ if($gene=mysql_fetch_assoc($result)){
 				{
 					if(isset($_POST['namer']))
 				{
-					$sql="INSERT INTO localisation (stage,gene_id,localisation,supportid,ip,time,notes,credit,inst,type) VALUES ('".$_POST['stage']."',".$_POST['geneid'].",'".$_POST['localisation']."','".$_POST['pubmed']."','".$_SERVER['REMOTE_ADDR']."',".time().",'".mysql_real_escape_string($_POST['notes'])."','".mysql_real_escape_string($_POST['namer'])."','".mysql_real_escape_string($_POST['institution'])."','".mysql_real_escape_string($_POST['type'])."')";
+					$sql="INSERT INTO localisation (stage,gene_id,localisation,supportid,ip,time,notes,credit,inst,type) VALUES ('".$_POST['stage']."',".$_POST['geneid'].",'".$_POST['localisation']."','".$_POST['pubmed']."','".$_SERVER['REMOTE_ADDR']."',".time().",'".mysqli_real_escape_string($_POST['notes'])."','".mysqli_real_escape_string($_POST['namer'])."','".mysqli_real_escape_string($_POST['institution'])."','".mysqli_real_escape_string($_POST['type'])."')";
 					echo $sql;
-				mysql_query( $sql); }
+				mysqli_query( $sql); }
 					
-					mysql_query("UPDATE genes SET LastChecked=".time()." WHERE id=".$_POST['geneid'])?>
+					mysqli_query("UPDATE genes SET LastChecked=".time()." WHERE id=".$_POST['geneid'])?>
 					<script>
 
     window.location.assign("/singlegene.php?gene=<?= $gene['GeneID'] ?>")
@@ -60,8 +60,8 @@ if($gene=mysql_fetch_assoc($result)){
                                             <label>What stage is the localisation described in?</label>
                                             <select class="form-control" name="stage">
 											<?
-											$result = mysql_query('SELECT * FROM phenotypestages'); 
-											while($row=mysql_fetch_assoc($result)){
+											$result = mysqli_query('SELECT * FROM phenotypestages'); 
+											while($row=mysqli_fetch_assoc($result)){
 											
 											?>
                                             <option value="<?= $row['id'] ?>"><?= $row['name'] ?></option><? } ?>
@@ -71,8 +71,8 @@ if($gene=mysql_fetch_assoc($result)){
 										<div class="form-group">
                                             <label>Where is the protein localised?</label>
 											<?
-											$result = mysql_query('SELECT * FROM localisations'); 
-											while($row=mysql_fetch_assoc($result)){
+											$result = mysqli_query('SELECT * FROM localisations'); 
+											while($row=mysqli_fetch_assoc($result)){
 											
 											?>
                                             <div class="radio">

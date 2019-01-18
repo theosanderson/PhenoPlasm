@@ -15,12 +15,12 @@ setcookie(
 <? include("header.php")
 ?>
 <?
-$result = mysql_query('SELECT * FROM genes WHERE GeneID="'.$_GET['gene'].'"');
+$result = mysqli_query('SELECT * FROM genes WHERE GeneID="'.$_GET['gene'].'"');
 if (!$result) {
-    die('Invalid query: ' . mysql_error());
+    die('Invalid query: ' . mysqli_error());
 }
 
-if($gene=mysql_fetch_assoc($result)){
+if($gene=mysqli_fetch_assoc($result)){
 ?>
 <div id="page-wrapper">
             <div class="container-fluid">
@@ -44,15 +44,15 @@ for( $i=0; $i<100; $i++ )
 
     if(isset($_POST['stage'.$i])&&$_POST['stage'.$i]!=0){
 	if($_POST['type']==1||$i>0){
-	$sql="INSERT INTO phenotypes (stage,gene_id,phenotype,supportid,ip,time,notes,credit,inst,type) VALUES ('".$i."',".$_POST['geneid'].",'".$_POST['stage'.$i]."','".$_POST['pubmed']."','".$_SERVER['REMOTE_ADDR']."',".time().",'".mysql_real_escape_string($_POST['notes'])."','".mysql_real_escape_string($_POST['namer'])."','".mysql_real_escape_string($_POST['institution'])."','".mysql_real_escape_string($_POST['type'])."')";
-mysql_query( $sql); 
+	$sql="INSERT INTO phenotypes (stage,gene_id,phenotype,supportid,ip,time,notes,credit,inst,type) VALUES ('".$i."',".$_POST['geneid'].",'".$_POST['stage'.$i]."','".$_POST['pubmed']."','".$_SERVER['REMOTE_ADDR']."',".time().",'".mysqli_real_escape_string($_POST['notes'])."','".mysqli_real_escape_string($_POST['namer'])."','".mysqli_real_escape_string($_POST['institution'])."','".mysqli_real_escape_string($_POST['type'])."')";
+mysqli_query( $sql); 
 }
 	}
 }
 					
 				}
 					
-					mysql_query("UPDATE genes SET LastChecked=".time()." WHERE id=".$_POST['geneid'])?>
+					mysqli_query("UPDATE genes SET LastChecked=".time()." WHERE id=".$_POST['geneid'])?>
 					<script>
 
     window.location.assign("/singlegene.php?gene=<?= $gene['GeneID'] ?>")
@@ -134,8 +134,8 @@ function handleChange(bla) {
                            
                         
 <?
-											$result = mysql_query('SELECT * FROM phenotypestages WHERE id>0'); 
-											while($row=mysql_fetch_assoc($result)){
+											$result = mysqli_query('SELECT * FROM phenotypestages WHERE id>0'); 
+											while($row=mysqli_fetch_assoc($result)){
 											
 											?>
                                             
@@ -143,8 +143,8 @@ function handleChange(bla) {
                                             <label><?= $row['name'] ?></label>
                                             <select class="form-control stagebox" name="stage<?= $row['id'] ?>">
 											<option value="0" selected>Not tested/reported</option>
-											<?$result2 = mysql_query('SELECT * FROM phenotyperefs'); 
-											while($row2=mysql_fetch_assoc($result2)){
+											<?$result2 = mysqli_query('SELECT * FROM phenotyperefs'); 
+											while($row2=mysqli_fetch_assoc($result2)){
 											
 											?>
                                            <option value="<?=$row2['id']?>"><?=$row2['name']?></option><? } ?>

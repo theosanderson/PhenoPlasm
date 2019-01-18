@@ -16,12 +16,12 @@
                         
 						<?
 						
-						mysql_query("DROP TABLE orthologlookup");
+						mysqli_query("DROP TABLE orthologlookup");
 	$sql="CREATE TABLE orthologlookup SELECT Organism, ortholog, COUNT(DISTINCT GeneID) AS catcount, GROUP_CONCAT(GeneID) AS catid FROM genes  GROUP BY Organism, ortholog ORDER BY `genes`.`ortholog` ASC";
 echo($sql."<br>");
-	$result=mysql_query($sql);
+	$result=mysqli_query($sql);
 	if (!$result) {
-    die('Invalid query: ' . mysql_error());
+    die('Invalid query: ' . mysqli_error());
 }
 //DROP  TABLE ogroups; CREATE TABLE `plasmogmdb`.`ogroups` ( `id` INT NOT NULL AUTO_INCREMENT  , PRIMARY KEY (`id`) ) ENGINE = MyISAM SELECT DISTINCT ortholog FROM genes;
 //UPDATE genes INNER JOIN ogroups ON ogroups.ortholog=genes.ortholog SET orthid=ogroups.id

@@ -1,7 +1,7 @@
 
 									<?
 						
-									while($row=mysql_fetch_assoc($result)){
+									while($row=mysqli_fetch_assoc($result)){
 									?>
 									
                                         <tr>

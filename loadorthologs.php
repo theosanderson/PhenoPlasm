@@ -18,18 +18,18 @@
 						function trysql($n)
 {
 echo($n."<br>");
-	$result=mysql_query($n);
+	$result=mysqli_query($n);
 	if (!$result) {
-    die('Invalid query: ' . mysql_error());
+    die('Invalid query: ' . mysqli_error());
 }
 }
 
 	
 
 
-$result = mysql_query('SELECT * FROM genes');
+$result = mysqli_query('SELECT * FROM genes');
 $genes = array();
-while($row=mysql_fetch_assoc($result)){
+while($row=mysqli_fetch_assoc($result)){
 $genes[$row['GeneID']]=$row['id'];
 }
 //print_r($genes);
@@ -44,7 +44,7 @@ foreach($contents as $line) {
 $x++;
 
 if($x>$_GET['start']&&$x<$_GET['end']){
-$line=mysql_real_escape_string(rtrim($line));
+$line=mysqli_real_escape_string(rtrim($line));
     list($destination,$commas)=explode("\t",rtrim($line));
 	
 	$sources=explode(",",rtrim($commas));
@@ -65,7 +65,7 @@ else{
 	
 }}
 $sql.="(0,0)";
-	mysql_query("INSERT INTO orthlinks (source, dest) VALUES ".$sql);
+	mysqli_query("INSERT INTO orthlinks (source, dest) VALUES ".$sql);
 						?>
                     <!-- /.col-lg-12 -->
                 </div>

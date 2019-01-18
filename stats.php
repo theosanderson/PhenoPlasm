@@ -10,9 +10,9 @@
                                         <tr>
                                             <th class="tallhead">Organism</th> <th class="tallhead">Number of genes</th></tr></thead>
 <?
-$result=mysql_query("Select genes.Organism AS Organism, Count(Distinct gene_id) As numgenes FROM phenotypes INNER JOIN genes on phenotypes.gene_id = genes.id GROUP BY genes.Organism");
+$result=mysqli_query("Select genes.Organism AS Organism, Count(Distinct gene_id) As numgenes FROM phenotypes INNER JOIN genes on phenotypes.gene_id = genes.id GROUP BY genes.Organism");
 $jsarray=array();
-while($row=mysql_fetch_assoc($result)){
+while($row=mysqli_fetch_assoc($result)){
 	$jsarray[]="['".$row['Organism']."',".$row['numgenes']."]";
 ?>
 <tr><td><a href="http://phenoplasm.org/advanced.php?text=&genes=&primespecies=<?= $row['Organism'] ?>&approach1=3&includeapproach1=on&approach2=2&includeapproach2=on&approach3=1&includeapproach3=on&approach4=4&includeapproach4=on&approach5=6&includeapproach5=on&approach6=5&includeapproach6=on&approach7=7&includeapproach7=on&display=phenos&type=web"><?= $row['Organism'] ?></a></td><td><?= $row['numgenes'] ?></td></tr>
@@ -57,9 +57,9 @@ function drawBasic() {
 	  </script>
 	  
 	  <?
-	  $result=mysql_query("Select phenotypeapproaches.longdesc AS Organism, Count(Distinct gene_id) As numgenes FROM phenotypes INNER JOIN genes on phenotypes.gene_id = genes.id INNER JOIN phenotypeapproaches ON phenotypeapproaches.id = phenotypes.type OR (phenotypeapproaches.id=1 AND phenotypes.type=0) GROUP BY phenotypeapproaches.longdesc");
+	  $result=mysqli_query("Select phenotypeapproaches.longdesc AS Organism, Count(Distinct gene_id) As numgenes FROM phenotypes INNER JOIN genes on phenotypes.gene_id = genes.id INNER JOIN phenotypeapproaches ON phenotypeapproaches.id = phenotypes.type OR (phenotypeapproaches.id=1 AND phenotypes.type=0) GROUP BY phenotypeapproaches.longdesc");
 	  $jsarray=array();
-	  while($row=mysql_fetch_assoc($result)){
+	  while($row=mysqli_fetch_assoc($result)){
 	$jsarray[]="['".$row['Organism']."',".$row['numgenes']."]";
 	  }
 	  ?>

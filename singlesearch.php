@@ -5,19 +5,19 @@ if(!isset($_GET['species'])){$_GET['species']="P. falciparum 3D7";}
 if(isset($_GET['gene'])){
 $search=strtoupper(trim($_GET['gene']));
 
-$result = mysql_query('SELECT * FROM genes WHERE GeneID="'.$search.'"');
+$result = mysqli_query('SELECT * FROM genes WHERE GeneID="'.$search.'"');
 if (!$result) {
-    die('Invalid query: ' . mysql_error());
+    die('Invalid query: ' . mysqli_error());
 }
 
-if($gene=mysql_fetch_assoc($result)){
+if($gene=mysqli_fetch_assoc($result)){
 $success=1;
 }
 else{
-$result = mysql_query('SELECT * FROM aliases INNER JOIN genes ON aliases.geneid = genes.id WHERE UPPER(aliases.alias) = "'.$search.'"');
+$result = mysqli_query('SELECT * FROM aliases INNER JOIN genes ON aliases.geneid = genes.id WHERE UPPER(aliases.alias) = "'.$search.'"');
 
 
-if(mysql_num_rows($result)==1&&$gene=mysql_fetch_assoc($result)){
+if(mysqli_num_rows($result)==1&&$gene=mysqli_fetch_assoc($result)){
 $success=1;
 }
 }

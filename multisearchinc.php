@@ -44,10 +44,10 @@ $query.="
 //print $query;
 //$query=$query="SELECT * FROM genes LEFT JOIN (SELECT COUNT(time) AS loccount, gene_id AS locgid FROM localisation GROUP BY gene_id) bla ON genes.id=bla.locgid LEFT JOIN (SELECT COUNT(time) AS phecount, gene_id AS phegid FROM phenotypes GROUP BY gene_id) bla2 ON genes.id=bla2.phegid";
 include("establishlocalisations.php");
-$result = mysql_query($query);
-$numrows=mysql_num_rows($result);
+$result = mysqli_query($query);
+$numrows=mysqli_num_rows($result);
 if (!$result) {
-    die('Invalid query: ' . mysql_error());
+    die('Invalid query: ' . mysqli_error());
 }
 if (!$csv){
 ?>
@@ -66,7 +66,7 @@ span.faded {
 						}
 						else{?>Gene	Description	GeneLocalisation	OrthologLocalisation	GeneViability	OrthologViability	GeneAsexual	OrthologAsexual	GeneGametocyte	OrthologGametocyte	GeneOokinete	OrthologOokinete	GeneOocyte	OrthologOocyte	GeneSprozoite	OrthologSporozoite	GeneLiver	OrthologLiver
 <?}
-						if(mysql_num_rows($result)>0){
+						if(mysqli_num_rows($result)>0){
 						if(!$csv){?>
 						<style>
 
@@ -92,7 +92,7 @@ span.faded {
 									<?
 									}
 						$sequence=array(); //temp
-									while($row=mysql_fetch_assoc($result)){
+									while($row=mysqli_fetch_assoc($result)){
 									if(!$csv){
 									?>
 									

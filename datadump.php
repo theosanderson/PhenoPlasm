@@ -18,7 +18,7 @@ include("establishlocalisations.php");
 				                <div class="row">
                     <div class="col-lg-12">
                         <h4><i class="fa fa-flask fa-fw"></i> Mutant phenotypes <small>[<a href="update.php?gene=<?= $gene['GeneID']?>">+</a>]</h4>
-						<? 			$result = mysql_query('SELECT * FROM phenotypes INNER JOIN genes ON phenotypes.gene_id=genes.id ORDER BY Organism,GeneID');
+						<? 			$result = mysqli_query('SELECT * FROM phenotypes INNER JOIN genes ON phenotypes.gene_id=genes.id ORDER BY Organism,GeneID');
 						?>
 						<?
 						$tablestarted=0;
@@ -45,14 +45,14 @@ include("establishlocalisations.php");
 									<?
 									}
 						?>
-						<? if(mysql_num_rows($result)>0){
+						<? if(mysqli_num_rows($result)>0){
 						tablestart();
 						$gene=array();
 						$gene['GeneID']="abc";
 					
 									
 						
-									while($row=mysql_fetch_assoc($result)){
+									while($row=mysqli_fetch_assoc($result)){
 									?>
 									
                                         <tr>
