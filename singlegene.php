@@ -4,7 +4,7 @@ include("establishlocalisations.php");
 <?
 $result = mysqli_query($link, 'SELECT * FROM genes WHERE GeneID="'.$_GET['gene'].'"');
 if (!$result) {
-    die('Invalid query: ' . mysqli_error());
+    die('Invalid query: ' . mysqli_error($link));
 }
 
 if($gene=mysqli_fetch_assoc($result)){
