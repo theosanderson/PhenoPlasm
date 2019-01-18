@@ -1,0 +1,3 @@
+<?
+setcookie("loc","ooh")
+?>
