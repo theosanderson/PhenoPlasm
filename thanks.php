@@ -1,3 +1,0 @@
-<?
-setcookie("loc","ooh")
-?>
