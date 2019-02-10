@@ -29,7 +29,7 @@ function checkandadd($phenotype,$stage)
 {
 global $rmid,$rodentid, $id;
 $rmid2="RMgm-".$rmid;
-$safepheno=mysqli_real_escape_string($phenotype);
+$safepheno=mysqli_real_escape_string($link,$phenotype);
 if(strlen($phenotype)>0&$phenotype!="Not tested"){
 
 if($phenotype=="Not different from wild type"){
