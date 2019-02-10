@@ -44,7 +44,7 @@ for( $i=0; $i<100; $i++ )
 
     if(isset($_POST['stage'.$i])&&$_POST['stage'.$i]!=0){
 	if($_POST['type']==1||$i>0){
-	$sql="INSERT INTO phenotypes (stage,gene_id,phenotype,supportid,ip,time,notes,credit,inst,type) VALUES ('".$i."',".$_POST['geneid'].",'".$_POST['stage'.$i]."','".$_POST['pubmed']."','".$_SERVER['REMOTE_ADDR']."',".time().",'".mysqli_real_escape_string($_POST['notes'])."','".mysqli_real_escape_string($_POST['namer'])."','".mysqli_real_escape_string($_POST['institution'])."','".mysqli_real_escape_string($_POST['type'])."')";
+	$sql="INSERT INTO phenotypes (stage,gene_id,phenotype,supportid,ip,time,notes,credit,inst,type) VALUES ('".$i."',".$_POST['geneid'].",'".$_POST['stage'.$i]."','".$_POST['pubmed']."','".$_SERVER['REMOTE_ADDR']."',".time().",'".mysqli_real_escape_string($link,$_POST['notes'])."','".mysqli_real_escape_string($link,$_POST['namer'])."','".mysqli_real_escape_string($link,$_POST['institution'])."','".mysqli_real_escape_string($link,$_POST['type'])."')";
 mysqli_query($link,  $sql); 
 }
 	}
