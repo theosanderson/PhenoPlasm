@@ -53,11 +53,16 @@ mysqli_query($link,  $sql);
 				}
 					
 					mysqli_query($link, "UPDATE genes SET LastChecked=".time()." WHERE id=".$_POST['geneid'])?>
+		    <? if(!(isset($_COOKIE['debug_mode']))){
 					<script>
 
     window.location.assign("/singlegene.php?gene=<?= $gene['GeneID'] ?>")
 
 </script><?
+					}
+			  else{
+				  print($sql);
+			  }
 				}
 				?>
 				
