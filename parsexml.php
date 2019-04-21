@@ -4,14 +4,14 @@ file_put_contents("xml/dump.xml",file_get_contents("http://www.pberghei.eu/csv/r
 include("header.php");
 
 $result=mysqli_query($link, "SELECT CONVERT(MID(supportid,6,20), UNSIGNED INTEGER) AS rmid FROM `phenotypes` WHERE typeofsupport=1 ORDER BY rmid DESC LIMIT 1");
-$num=mysqli_result ($result,0);
+$num=mysqli_fetch_array ($result)[0];
 
-function trysql($n){
+function trysql($n,$link){
 echo($n."<br>");
 echo $sql;
 	$result=mysqli_query($link, $n);
 	if (!$result) {
-    die('Invalid query: ' . mysqli_error());
+    die('Invalid query: ' . mysqli_error($link));
 }
 }
 $result = mysqli_query($link, 'SELECT * FROM genes');
@@ -25,7 +25,7 @@ $xml = preg_replace('/[[:^print:]]/', '', $xml);
 $data = new SimpleXMLElement($xml);
 
 
-function checkandadd($phenotype,$stage)
+function checkandadd($phenotype,$stage, $link)
 {
 global $rmid,$rodentid, $id;
 $rmid2="RMgm-".$rmid;
@@ -34,13 +34,13 @@ if(strlen($phenotype)>0&$phenotype!="Not tested"){
 
 if($phenotype=="Not different from wild type"){
 $finalphen=2;
-trysql("INSERT INTO phenotypes (gene_id,typeofsupport,supportid,stage,phenotype,time) VALUES ($id,1,'$rmid2',$stage,$finalphen,".time().")");
+trysql("INSERT INTO phenotypes (gene_id,typeofsupport,supportid,stage,phenotype,time) VALUES ($id,1,'$rmid2',$stage,$finalphen,".time().")",$link);
 
 }
 
 else{
 	$finalphen=3;
-trysql("INSERT INTO phenotypes (gene_id,typeofsupport,supportid,stage,phenotype,notes,time) VALUES ($id,1,'$rmid2',$stage,$finalphen,'$safepheno',".time().")");
+trysql("INSERT INTO phenotypes (gene_id,typeofsupport,supportid,stage,phenotype,notes,time) VALUES ($id,1,'$rmid2',$stage,$finalphen,'$safepheno',".time().")",$link);
 }
 }
 
@@ -78,16 +78,16 @@ foreach ($data->rmgm as $entry) {
 	if($success=="no")
 	{
 	
-	trysql("INSERT INTO phenotypes (gene_id,phenotype,typeofsupport,supportid,stage,time) VALUES ($id,7,1,'$rmid2',0,".time().")");
+	trysql("INSERT INTO phenotypes (gene_id,phenotype,typeofsupport,supportid,stage,time) VALUES ($id,7,1,'$rmid2',0,".time().")",$link);
 	}
 	else{
-		trysql("INSERT INTO phenotypes (gene_id,phenotype,typeofsupport,supportid,stage,time) VALUES ($id,8,1,'$rmid2',0,".time().")");
-	checkandadd($pheasexual,1);
-	checkandadd($phegam,2);
-	checkandadd($pheook,3);
-	checkandadd($pheoocyst,4);
-	checkandadd($phesporo,5);
-	checkandadd($pheliver,6);
+		trysql("INSERT INTO phenotypes (gene_id,phenotype,typeofsupport,supportid,stage,time) VALUES ($id,8,1,'$rmid2',0,".time().")",$link);
+	checkandadd($pheasexual,1,$link);
+	checkandadd($phegam,2,$link);
+	checkandadd($pheook,3,$link);
+	checkandadd($pheoocyst,4,$link);
+	checkandadd($phesporo,5,$link);
+	checkandadd($pheliver,6,$link);
 	}
 	
    }
