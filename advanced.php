@@ -1,4 +1,5 @@
 <?
+
 if($_GET['type']=="csv"|$_POST['type']=="csv"){
 	header("Content-Type: application/force-download");
 	$filename="phenotype.txt";
@@ -17,6 +18,7 @@ if(isset($_GET['text'])){
 if(isset($_POST['text'])){
 	
 $search=$_POST['genes'];
+$search=stripcslashes($search);
 $search = str_replace("\t", " ", $search); // windows -> unix
 $search = str_replace("\r\n", "\n", $search); // windows -> unix
 $search = str_replace("\r", "\n", $search);   // remaining -> unix

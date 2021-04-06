@@ -29,11 +29,11 @@ structured phenotyping data from attempts to knock out <i>Plasmodium</i> genes. 
   <p>We have a <a href="/datadumpcsv.php">data dump</a> of all phenotypes in the dataset. You can aso extract data from any search in CSV format. Details of the taxonomy used in CSV format are available <a href="csvsupport.php">here</a>. You can also conduct a search, or advanced search, without entering any gene IDs to see summary data.</p> 
  
   <h2>Who can I contact to amend this data?</h2>
-  <p>Please email the <a href="theo@theo.io">curator</a> if you spot any errors. If subsequent publications contradict previous results please add the data from them, as described above.</p>
+  <p>Please email the <a href="mailto:theo@theo.io">curator</a> if you spot any errors. If subsequent publications contradict previous results please add the data from them, as described above.</p>
 
 
 <h2>A quick request</h2>
-<p>Do you find this database helpful? If so I would love it if you could send a quick testimonial to <a href="theo@theo.io">me</a> to cite in future applications for funding.</p>
+<p>Do you find this database helpful? If so we'd be grateful if you could <a href="mailto:theo@theo.io">send</a> a brief testimonial to cite in future applications for funding.</p>
 
 
   

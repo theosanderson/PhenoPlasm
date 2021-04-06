@@ -5,6 +5,17 @@
 $time_start = microtime(true); 
 include("db_details.php");
  $link = mysqli_connect($db_location,$db_user,$db_pass);
+
+ foreach ($_GET as $key => $val)
+{
+   $_GET[$key] = mysqli_real_escape_string($link,$val);
+}
+
+foreach ($_POST as $key => $val)
+{
+   $_POST[$key] = mysqli_real_escape_string($link,$val);
+}
+
 $db_selected = mysqli_select_db( $link, 'plasmogmdb');
 if (!$db_selected) {
     die ('Can\'t use foo : ' . mysqli_error($link));

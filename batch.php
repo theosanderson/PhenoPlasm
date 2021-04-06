@@ -15,6 +15,7 @@ $_GET['genes']=$_POST['genes'];
 }
 if($_GET['genes']){
 $search=$_GET['genes'];
+$search=stripcslashes($search);
 $search = str_replace("\t", " ", $search); // windows -> unix
 $search = str_replace("\r\n", "\n", $search); // windows -> unix
 $search = str_replace("\r", "\n", $search);   // remaining -> unix
