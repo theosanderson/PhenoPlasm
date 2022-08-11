@@ -86,6 +86,9 @@ mysqli_query($link,  $sql);
                                                 <option value="5">Promoter-swap</option>
 												<option value="6">Knock down</option>
 												<option value="7">Spontaneous/natural deletion</option>
+						    <option value="8">Knock-sideways</option>
+						    <option value="9">DiCre</option>
+						    
                                             </select>
                                         </div>
 										<script>
