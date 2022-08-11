@@ -180,7 +180,7 @@ function handleChange(bla) {
                                             <p class="help-block">E.g. aberrant morphologhy, specific defects, etc.</p>
                                         </div>				
                                         <div class="form-group">
-                                            <label>What is the PubMed ID that includes this phenotype?</label>
+                                            <label>What is the PubMed ID, or BioRxiv URL, that includes this phenotype?</label>
                                             <input name="pubmed" class="form-control">
                                             
                                         </div>

@@ -7,6 +7,7 @@ $result=mysqli_query($link, "SELECT CONVERT(MID(supportid,6,20), UNSIGNED INTEGE
 $num=mysqli_fetch_array ($result)[0];
 
 function trysql($n,$link){
+	echo("trying");
 echo($n."<br>");
 echo $sql;
 	$result=mysqli_query($link, $n);
@@ -20,6 +21,7 @@ while($row=mysqli_fetch_assoc($result)){
 $genes[$row['GeneID']]=$row['id'];
 }
 
+
 $xml=file_get_contents("xml/dump.xml");
 $xml = preg_replace('/[[:^print:]]/', '', $xml); 
 $data = new SimpleXMLElement($xml);
@@ -30,6 +32,11 @@ function checkandadd($phenotype,$stage, $link)
 global $rmid,$rodentid, $id;
 $rmid2="RMgm-".$rmid;
 $safepheno=mysqli_real_escape_string($link,$phenotype);
+if(!$id){
+	echo("No id for "+$rodentid);
+}
+else{
+	print("ID for:"+$id);
 if(strlen($phenotype)>0&$phenotype!="Not tested"){
 
 if($phenotype=="Not different from wild type"){
@@ -50,6 +57,7 @@ trysql("INSERT INTO phenotypes (gene_id,typeofsupport,supportid,stage,phenotype,
 
 
 }
+}
 
 foreach ($data->rmgm as $entry) {
  
@@ -65,8 +73,11 @@ foreach ($data->rmgm as $entry) {
    $rmid2="RMgm-".$rmid;
    if($rmid>$num & ($rmid<1601 | $rmid>4055 )& $rmid != 4134 & ($rmid<4195 | $rmid>4311)){
     $gene= (string) $entry->modifications->modification->gene_model_pberghei;
+	echo($gene);
+	echo("<br>");
 	
 	$id=$genes[strtoupper($gene)];
+	if($id){
 	
 	$pheasexual=$entry->phenotype->phenotype_asexual;
 	$phegam=$entry->phenotype->phenotype_gametocyte;
@@ -94,6 +105,6 @@ foreach ($data->rmgm as $entry) {
   }
    }
 }
-
+}
 
  ?>
